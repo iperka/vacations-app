@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -7,9 +8,15 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Auth0Provider
+      domain="iperka.eu.auth0.com"
+      clientId="MY_CLIENT_ID"
+      redirectUri={window.location.origin}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
