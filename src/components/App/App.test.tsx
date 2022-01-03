@@ -1,18 +1,30 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import App from ".";
 
 describe("components/App", () => {
-  it("should render text", () => {
-    render(<App />);
-    expect(screen.getByText(/Hello world!/)).toBeInTheDocument();
+  beforeEach(() => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
   });
 
-  // it("should render development banner if NODE_ENV is development", () => {
-  //   jest.resetModules();
-  //   process.env = Object.assign(process.env, {
-  //     NODE_ENV: "development",
-  //   });
-  //   render(<App />);
-  //   expect(screen.getByText(/Development/)).toBeInTheDocument();
-  // });
+  it("should render text", () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/logo-light\.svg/)).toBeInTheDocument();
+  });
 });

@@ -1,19 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useDarkMode } from "../../helpers/hooks";
 import { ReactComponent as LogoDark } from "../../images/logos/logo-dark.svg";
 import { ReactComponent as LogoLight } from "../../images/logos/logo-light.svg";
 
 export default function NotFoundPage() {
+  const [isDark, setIsDark] = useDarkMode();
+
   return (
     <div className="min-h-full pt-16 pb-12 flex flex-col bg-white dark:bg-gray-900 transition-all">
       <main className="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex-shrink-0 flex justify-center">
           <a href="/" className="inline-flex">
             <span className="sr-only">iperka</span>
-            <div className="h-12 w-auto dark:hidden">
-              <LogoLight width={150} />
-            </div>
-            <div className="h-12 w-auto hidden dark:block">
-              <LogoDark width={150} />
+            <div className="h-12 w-auto">
+              {isDark ? <LogoDark width={150} /> : <LogoLight width={150} />}
             </div>
           </a>
         </div>
@@ -29,12 +30,12 @@ export default function NotFoundPage() {
               Sorry, we couldn’t find the page you’re looking for.
             </p>
             <div className="mt-6">
-              <a
-                href="#"
+              <Link
+                to={"/"}
                 className="text-base font-medium text-blue-600 hover:text-blue-500"
               >
                 Go back home<span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

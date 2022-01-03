@@ -10,7 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
       domain="iperka.eu.auth0.com"
-      clientId="MY_CLIENT_ID"
+      clientId="TCEf2sYKN9rfX26cIx5ZW5MXg863TBwi"
       redirectUri={window.location.origin}
     >
       <BrowserRouter>

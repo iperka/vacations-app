@@ -19,7 +19,8 @@ export type NavbarProps = {
 
 const Navbar = (props: NavbarProps) => {
   const [isDark, setIsDark] = useDarkMode();
-  const { loginWithRedirect, isLoading, isAuthenticated, logout } = useAuth0();
+  const { loginWithRedirect, isLoading, isAuthenticated, logout, user } =
+    useAuth0();
 
   return (
     <Disclosure
@@ -45,8 +46,13 @@ const Navbar = (props: NavbarProps) => {
                   </div>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  <NavItem to={"/dashboard"} text="Dashboard" active={true} />
-                  <NavItem to={"/vacations"} text="Vacations" active={false} />
+                  <NavItem to={"/"} text="Home" />
+                  {isAuthenticated && (
+                    <>
+                      <NavItem to={"/dashboard"} text="Dashboard" />
+                      <NavItem to={"/vacations"} text="Vacations" />
+                    </>
+                  )}
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -58,7 +64,7 @@ const Navbar = (props: NavbarProps) => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={user?.picture}
                           alt=""
                         />
                       </Menu.Button>
